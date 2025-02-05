@@ -14,8 +14,8 @@ body {
 .container {
     border-radius: 4px;
     background-color: #1a2519;
-    width: 50%;
-    height: 50%;
+    width: 400px;
+    height: 400px;
 }
 
 .display {
