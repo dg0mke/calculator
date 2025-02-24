@@ -69,10 +69,6 @@ body {
     font-weight: bold;
 }
 
-.zero {
-    width: 132px;
-}
-
 .digit:hover {
     background-color: #6f6f6f;
 }
