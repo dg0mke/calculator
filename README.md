@@ -2,7 +2,7 @@
 This is the third and the last project in a series of JavaScript Basics projects from The Odin Project curriculum.
 
 Features I'll definitely implement in the future:
-* percentage calculation
+* ~~percentage calculation~~
 * exponentation operator
 * parentheses combined with expressions
 * proper operator precedence
