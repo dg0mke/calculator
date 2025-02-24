@@ -108,7 +108,7 @@ const operate = () => {
         return +(Math.sqrt(parseFloat(num))).toFixed(2);
     });
 
-    if (expression.startsWith("*") || expression.startsWith("/")) {
+    if (expression.startsWith("*") || expression.startsWith("/") || expression.startsWith("%")) {
         return "Malformed expression";
     }
 
