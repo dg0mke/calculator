@@ -1,5 +1,6 @@
 const display = document.querySelector(".display");
 const digits = document.querySelectorAll(".digit");
+const percentBtn = document.querySelector(".percent");
 const decimalBtn =  document.querySelector(".decimal");
 const operators = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
@@ -23,6 +24,11 @@ operators.forEach((operator) => {
         digits.forEach(digit => digit.disabled = false);
         decimalBtn.disabled = false;
     });
+});
+
+// Handle percentage
+percentBtn.addEventListener("click", () => {
+    display.textContent += "%";
 });
 
 // Handle decimals
@@ -66,7 +72,38 @@ const operate = () => {
 
     // Replace the operator symbols with JavaScript ones
     expression = expression.replace(/÷/g, "/").replace(/×/g, "*").replace(/−/g, "-");
-    
+
+    const calculatePercentage = (exp) => {
+        const regex = /(-?\d+(?:\.\d+)?)\s*([+\-*/])\s*(\d+(?:\.\d+)?)%/g;
+        let match;
+        let newExp = exp;
+
+        while ((match = regex.exec(newExp)) !== null) {
+            const num1 = parseFloat(match[1]);
+            const operator = match[2];
+            const percent = parseFloat(match[3]) / 100;
+            let percentageValue;
+
+            if (operator === "+") {
+                percentageValue = num1 + (num1 * percent);
+            } else if (operator === "-") {
+                percentageValue = num1 - (num1 * percent);
+            } else if (operator === "*") {
+                percentageValue = num1 * percent;
+            } else if (operator === "/") {
+                percentageValue = num1 / percent;
+            }
+
+            newExp = newExp.replace(match[0], percentageValue.toString());
+            regex.lastIndex = 0;
+        }
+
+        newExp = newExp.replace(/(\d+(?:\.\d+)?)%/g, (_match, num) => (parseFloat(num) / 100).toString());
+        return newExp;
+    };
+
+    expression = calculatePercentage(expression);
+
     expression = expression.replace(/√(\d+(\.\d*)?)/g, (_match, num) => {
         return +(Math.sqrt(parseFloat(num))).toFixed(2);
     });
